@@ -5313,7 +5313,14 @@
                         $sdata['refurl'] = getenv("HTTP_REFERER");
                     }
                 }
-
+                
+                //Saving also question order
+                //Saving question order
+                if (isset($_SESSION['survey_'.$this->sid]['insertarray'])) {
+                    $questionOrder = implode('|', $_SESSION['survey_'.$this->sid]['insertarray']);
+                    $sdata['question_order'] = $questionOrder;
+                }
+                
                 $sdata = array_filter($sdata);
                 SurveyDynamic::sid($this->sid);
                 $oSurvey = new SurveyDynamic;

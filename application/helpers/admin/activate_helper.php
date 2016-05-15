@@ -254,7 +254,6 @@ function checkQuestions($postsid, $iSurveyID, $qtypes)
 */
 function activateSurvey($iSurveyID, $simulate = false)
 {
-    $createsurvey='';
     $activateoutput='';
     $createsurveytimings='';
     $fieldstiming = array();
@@ -382,6 +381,9 @@ function activateSurvey($iSurveyID, $simulate = false)
 
     // If last question is of type MCABCEFHP^QKJR let's get rid of the ending coma in createsurvey
     //$createsurvey = rtrim($createsurvey, ",\n")."\n"; // Does nothing if not ending with a comma
+
+    //Add column for saving question group orders (in case of randomized question groups)
+    $createsurvey['question_order'] = "text";
 
     $tabname = "{{survey_{$iSurveyID}}}";
     Yii::app()->loadHelper("database");
